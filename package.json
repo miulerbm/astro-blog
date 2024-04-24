@@ -1,17 +1,21 @@
 {
-  "name": "astro-blog",
+  "name": "@example/minimal",
   "type": "module",
   "version": "0.0.1",
+  "private": true,
+  "browserslist": [
+    "defaults"
+  ],
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "astro check && astro build",
+    "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^4.6.4",
-    "@astrojs/check": "^0.5.10",
-    "typescript": "^5.4.5"
+    "astro": "^1.6.13",
+    "postcss": "^8.4.19",
+    "postcss-preset-env": "^7.8.3"
   }
 }
