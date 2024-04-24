@@ -1,0 +1,17 @@
+---
+import MainHead from "./MainHead.astro";
+
+const {
+  // These are default values
+  title = "My Astro Blog",
+  description = "My journey as a web developer",
+} = Astro.props;
+---
+
+<html lang="en">
+  <!-- <MainHead title={title} description={description} /> -->
+  <MainHead {title} {description} />
+  <body>
+    <slot> Default Text </slot>
+  </body>
+</html>
