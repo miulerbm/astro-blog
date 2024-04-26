@@ -1,0 +1,42 @@
+---
+
+import MainLayout from "./MainLayout.astro";
+
+//utils import
+import { slugify, formatDate } from "../js/utils";
+import PostHeader from "../components/PostHeader.astro";
+
+const { frontmatter } = Astro.props;
+// We see the following:
+// frontmatter {
+//   title: 'A Post about Important Items Of Life',
+//   date: '2022-11-20T00:00:00.000Z',
+//   author: 'Darnell McClure',
+//   image: { src: '/images/post-1.jpg', alt: 'A picture of a coder' },
+//   description: 'Have you ever wondered what the most important items of life are? Well, wonder no more!',
+//   draft: false,
+//   category: 'Reference Docs',
+//   file: '/home/miuler/Dev/projects/astro-blog/src/pages/blog/post-1.md',
+//   url: '/blog/post-1',
+//   astro: {}
+// }
+
+const { title, description, date, category, author, image } = frontmatter;
+---
+
+<MainLayout {title} {description}>
+    <PostHeader
+    {title}
+    {description}
+    {date}
+    {category}
+    {image}
+    {author}
+    />
+    <div class="post-content">
+      <div class="content">
+        <slot />
+      </div>
+      <div class="sidebar"></div>
+    </div>
+</MainLayout>
