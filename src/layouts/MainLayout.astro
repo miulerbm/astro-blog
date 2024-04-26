@@ -12,11 +12,12 @@ const {
 ---
 
 <html lang="en">
-  <!-- <MainHead title={title} description={description} /> -->
   <MainHead {title} {description} />
   <body>
     <Nav />
-    <slot> Default Text </slot>
+    <main>
+      <slot> Default Text</slot>
+    </main>
     <Footer />
   </body>
 </html>
