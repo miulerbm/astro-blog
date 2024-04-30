@@ -4,6 +4,7 @@ import Icon from "astro-icon";
 interface Props {
   text: string;
   href: string;
+  target?: string;
   style: "primary" | "secondary";
   icon?: {
     name: string;
@@ -17,6 +18,7 @@ interface Props {
 const {
   text,
   href,
+  target,
   style,
   icon,
   isFilled = true,
@@ -28,6 +30,7 @@ const {
 
 <a
   href={href}
+  target={target}
   class:list={[
     "link",
     classes,
