@@ -1,27 +1,26 @@
 ---
 import MainLayout from "./MainLayout.astro";
-
-//utils import
-import { slugify, formatDate } from "../js/utils";
 import PostHeader from "../components/PostHeader.astro";
 import CategoryCloud from "../components/CategoryCloud.astro";
+import RelatedPosts from "../components/RelatedPosts.astro";
+
+//utils import
+import { formatBlogPosts } from "../js/utils";
 
 const { frontmatter } = Astro.props;
-// We see the following:
-// frontmatter {
-//   title: 'A Post about Important Items Of Life',
-//   date: '2022-11-20T00:00:00.000Z',
-//   author: 'Darnell McClure',
-//   image: { src: '/images/post-1.jpg', alt: 'A picture of a coder' },
-//   description: 'Have you ever wondered what the most important items of life are? Well, wonder no more!',
-//   draft: false,
-//   category: 'Reference Docs',
-//   file: '/home/miuler/Dev/projects/astro-blog/src/pages/blog/post-1.md',
-//   url: '/blog/post-1',
-//   astro: {}
-// }
-
 const { title, description, date, category, author, image } = frontmatter;
+
+const allPosts = await Astro.glob("../pages/blog/*.md");
+const formattedPosts = formatBlogPosts(allPosts, {
+  sortByDate: false,
+});
+const relatedPosts = formattedPosts
+  .filter(
+    (post) =>
+      post.frontmatter.category.toLowerCase() === category.toLowerCase() &&
+      post.frontmatter.title !== title
+  )
+  .slice(0, 3);
 ---
 
 <MainLayout {title} {description}>
@@ -35,6 +34,14 @@ const { title, description, date, category, author, image } = frontmatter;
         <h2 class="h3">Blog Categories</h2>
         <CategoryCloud />
       </aside>
+      {
+        relatedPosts.length > 0 && (
+          <aside class="container" aria-label="Related posts">
+            <h2 class="h3">Related posts</h2>
+            <RelatedPosts {relatedPosts} />
+          </aside>
+        )
+      }
     </div>
   </div>
 </MainLayout>
