@@ -4,4 +4,5 @@ module.exports = {
       stage: 0,
     }),
   ],
+  tailwindcss: {},
 };
